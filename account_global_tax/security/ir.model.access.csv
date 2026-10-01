@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_global_tax,Access account move global tax,account.model_account_move,base.group_user,1,1,1,0
+access_sale_order_global_tax,Access sale order global tax,sale.model_sale_order,base.group_user,1,1,1,0
+access_purchase_order_global_tax,Access purchase order global tax,purchase.model_purchase_order,base.group_user,1,1,1,0
+access_global_tax_wizard,Access global tax wizard,model_global_tax_wizard,base.group_user,1,1,1,0
