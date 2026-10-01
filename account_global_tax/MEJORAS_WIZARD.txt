@@ -1,0 +1,195 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                        🎨 WIZARD MEJORADO v16.0.4.1                       ║
+║                     Account Global Tax - Mejoras Aplicadas                 ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+✨ CAMBIOS IMPLEMENTADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 1. HEADER MEJORADO - Información en una sola línea
+   ┌─────────────────────────────────────────────────────────────────┐
+   │ INFORMACIÓN DEL DOCUMENTO              IMPUESTOS SELECCIONADOS   │
+   │                                                                  │
+   │ Tipo: account.move                                          0    │
+   │ Líneas de Producto: 3                                           │
+   └─────────────────────────────────────────────────────────────────┘
+
+✅ 2. CAMPOS MÁS AMPLIOS
+   • El area de selección de impuestos ahora ocupa todo el ancho
+   • Los tags de impuestos se distribuyen mejor
+   • Mejor visibilidad y accesibilidad
+
+✅ 3. CONTADORES DESTACADOS
+   • Contador de líneas: Tamaño 24px, color azul (#3498db)
+   • Contador de impuestos: Tamaño 32px, color verde (#27ae60)
+   • Separador visual entre secciones
+
+✅ 4. INFORMACIÓN EN UNA LÍNEA
+   • Header unificado con flexbox
+   • Tipo de documento a la izquierda
+   • Contador de impuestos a la derecha
+   • Separador visual central
+
+✅ 5. MENSAJE INFORMATIVO MEJORADO
+   • Icono de información (fa-info-circle)
+   • Texto descriptivo más claro
+   • Referencia dinámica al contador de líneas
+   • Recuerda que no se duplican impuestos
+
+
+📐 ESTRUCTURA DEL NUEVO WIZARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│  INFORMACIÓN DEL DOCUMENTO          IMPUESTOS SELECCIONADOS             │
+│                                                                         │
+│  Tipo: account.move                                                 0   │
+│  Líneas de Producto: 3                                                  │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Selecciona uno o más impuestos:                                        │
+│  [IVA 19%] [Retención 2%] [Impuesto Adicional] [...]                  │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ℹ Información: Los impuestos se aplicarán a todas las 3 líneas del    │
+│  documento. Si un impuesto ya existe en una línea, no se duplicará.    │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  [Aplicar Impuestos]  [Remover Impuestos]  [Cancelar]                 │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+🎨 MEJORAS DE DISEÑO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ANTES                              DESPUÉS
+──────────────────────────────────────────────────────────────────────────
+Información en 2 alertas           Header unificado con flexbox
+Contador pequeño (12px)            Contador grande (32px)
+Espaciado pobre                    Espaciado profesional (15px, 30px)
+Texto sin estructura               Jerarquía visual clara
+Alertas desconectadas              Diseño integrado
+
+COLORES Y ESTILOS
+──────────────────────────────────────────────────────────────────────────
+• Header background: Blanco
+• Separador: 2px solid #e0e0e0
+• Texto label: 12px, color #666
+• Tipo documento: 16px, color #2c3e50
+• Contador líneas: 24px, color azul #3498db
+• Contador impuestos: 32px, color verde #27ae60
+• Font-weight: bold en contadores
+• Padding: 15px vertical, 30px horizontal
+
+
+🔧 CAMBIOS TÉCNICOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Archivo modificado:
+  ✅ views/global_tax_wizard_views.xml
+
+Cambios específicos:
+  • Se reemplazó estructura de <group> por <div> con flexbox
+  • Agregado style inline para control preciso de layout
+  • Mejora de Bootstrap classes a CSS personalizado
+  • Agregado widget="integer" para contadores
+  • Mensaje informativo con icono y referencias dinámicas
+
+
+📱 RESPONSIVIDAD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Desktop (1200px+)
+   • Layout horizontal completo
+   • Información lado a lado
+   • Máxima legibilidad
+
+✅ Tablet (768px-1200px)
+   • Layout se adapta
+   • Contadores aún visibles
+   • Campos amplios
+
+✅ Mobile (< 768px)
+   • Stack vertical (flexbox responsivo)
+   • Contadores apilados
+   • Toca adaptándose
+
+
+💡 MEJORAS DE UX
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Información visual clara y jerárquica
+✅ Contadores grandes y destacados
+✅ Mejor contraste de colores
+✅ Separación clara entre secciones
+✅ Mensaje informativo relevante
+✅ Campos de selección más amplios
+✅ Mejor distribución del espacio
+✅ Flujo visual de arriba a abajo
+
+
+📊 COMPARATIVA ANTES/DESPUÉS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Aspecto                    ANTES           DESPUÉS
+─────────────────────────────────────────────────────────────
+Ancho de campos           Compartido       100% disponible
+Tamaño contadores        12-14px          24-32px
+Altura del header         Comprimida       Expandida (60px)
+Espaciado                 Compacto         Profesional
+Jerarquía visual          Débil            Fuerte
+Información documento     Alert box        Header estructurado
+Contadores                Secundarios      Prominentes
+Layout                    2 columnas       Flexbox unificado
+
+
+🎯 RESULTADO FINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+El wizard ahora presenta:
+  ✅ Aspecto profesional y moderno
+  ✅ Información centralizada y clara
+  ✅ Contadores prominentes y visibles
+  ✅ Mejor uso del espacio disponible
+  ✅ UX mejorada para el usuario
+  ✅ Diseño consistente con Odoo
+
+
+🚀 INSTALACIÓN DE ACTUALIZACIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Extrae el nuevo paquete:
+   $ tar -xzf account_global_tax_v16.0.4.0.0.tar.gz
+
+2. Reemplaza la carpeta anterior:
+   $ rm -rf /path/to/odoo/addons/account_global_tax
+   $ cp -r account_global_tax /path/to/odoo/addons/
+
+3. Reinicia Odoo:
+   $ ./odoo-bin -d tu_base_datos -u account_global_tax
+
+4. Limpia caché del navegador (Ctrl+Shift+Delete)
+
+5. ¡El wizard se verá mejorado!
+
+
+✅ VERSIÓN ACTUALIZADA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Versión Anterior:  16.0.4.0.0
+Versión Nueva:     16.0.4.0.0 (con wizard mejorado)
+Cambio:            Mejora visual del formulario wizard
+Archivo:           views/global_tax_wizard_views.xml
+
+════════════════════════════════════════════════════════════════════════════════
+
+¡Tu wizard ahora se ve más profesional y es más fácil de usar!
+
+════════════════════════════════════════════════════════════════════════════════
+
+Generado: 2026-10-01

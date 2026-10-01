@@ -1,0 +1,93 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         🚀 INICIO RÁPIDO                                   ║
+║            Account Global Tax v16.0.4.0.0 - 5 MINUTOS                      ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+⚡ INSTALACIÓN EN 3 PASOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PASO 1️⃣  - EXTRAER
+────────────────────────────────────────────────────────────────────────────
+$ tar -xzf account_global_tax_v16.0.4.0.0.tar.gz
+
+Resultado: Carpeta "account_global_tax" creada
+
+
+PASO 2️⃣  - COPIAR A ODOO
+────────────────────────────────────────────────────────────────────────────
+$ cp -r account_global_tax /path/to/odoo/addons/
+
+Ejemplos:
+  • Linux:    cp -r account_global_tax /opt/odoo/addons/
+  • Docker:   docker cp account_global_tax CONTAINER:/addons/
+  • Windows:  copy /path/to/account_global_tax C:\odoo\addons\
+
+
+PASO 3️⃣  - REINICIAR ODOO
+────────────────────────────────────────────────────────────────────────────
+Terminal:
+$ ./odoo-bin -d tu_base_datos -u account_global_tax
+
+O vía Systemd:
+$ sudo systemctl restart odoo
+
+
+⏱️  2-3 MINUTOS DESPUÉS...
+────────────────────────────────────────────────────────────────────────────
+✅ El módulo está instalado automáticamente
+✅ La base de datos se actualizó
+
+🎉 ¡LISTO! El módulo funciona
+
+
+🎯 USO INMEDIATO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PASO 1: Accede a Odoo
+────────────────────────────────────────────────────────────────────────────
+1. Abre el navegador: http://localhost:8069
+2. Inicia sesión como administrador
+3. Ve a: Contabilidad
+
+
+PASO 2: Crea impuestos (si no existen)
+────────────────────────────────────────────────────────────────────────────
+1. Ve a: Contabilidad → Configuración → Impuestos
+2. Crea uno nuevo:
+   • Nombre: IVA 19%
+   • Tipo: Venta
+   • Porcentaje: 19
+3. Guarda
+
+
+PASO 3: Abre una factura
+────────────────────────────────────────────────────────────────────────────
+1. Ve a: Contabilidad → Facturas de Cliente
+2. Abre o crea una factura
+3. Agrega líneas de productos
+
+
+PASO 4: Aplica impuestos globales
+────────────────────────────────────────────────────────────────────────────
+1. Haz click en: "Impuestos Globales" (botón con icono calculadora)
+2. Se abre un modal
+3. Selecciona "IVA 19%"
+4. Click en "Aplicar Impuestos"
+
+✨ HECHO: Todas las líneas tienen IVA 19%
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+¡COMIENZA AHORA MISMO!
+
+1. Extrae: tar -xzf account_global_tax_v16.0.4.0.0.tar.gz
+2. Copia: cp -r account_global_tax /path/to/odoo/addons/
+3. Reinicia: ./odoo-bin -d tu_base_datos -u account_global_tax
+4. ¡Úsalo!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Generado: 2026-10-01
+Módulo: Account Global Tax v16.0.4.0.0
+Estado: ✅ Listo para producción
