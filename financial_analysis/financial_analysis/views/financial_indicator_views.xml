@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Financial Indicator Form View -->
+        <record id="financial_indicator_form" model="ir.ui.view">
+            <field name="name">financial.indicator.form</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <form string="Financial Indicator">
+                    <group>
+                        <group string="Indicator Details">
+                            <field name="name"/>
+                            <field name="category"/>
+                            <field name="value" widget="float" precision="2"/>
+                            <field name="unit"/>
+                        </group>
+                        <group string="Analysis">
+                            <field name="benchmark" widget="float" precision="2"/>
+                            <field name="variance" widget="float" precision="2"/>
+                            <field name="status" widget="badge"/>
+                        </group>
+                    </group>
+
+                    <separator string="📊 What it Measures"/>
+                    <field name="legend_description" nolabel="1" readonly="1" widget="text"/>
+
+                    <separator string="📈 Your Score Interpretation"/>
+                    <field name="legend_interpretation" nolabel="1" readonly="1" widget="text"/>
+
+                    <separator string="✨ How to Improve"/>
+                    <field name="legend_improvement" nolabel="1" readonly="1" widget="text"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Financial Indicator Tree View -->
+        <record id="financial_indicator_tree" model="ir.ui.view">
+            <field name="name">financial.indicator.tree</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <tree string="Financial Indicators" decoration-success="status=='excellent'" decoration-info="status=='good'" decoration-warning="status=='fair'" decoration-danger="status=='poor'">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="value"/>
+                    <field name="unit"/>
+                    <field name="benchmark"/>
+                    <field name="variance"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Financial Indicator Search View -->
+        <record id="financial_indicator_search" model="ir.ui.view">
+            <field name="name">financial.indicator.search</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <search string="Financial Indicators">
+                    <field name="name" string="Indicator"/>
+                    <field name="category"/>
+                    <filter string="Excellent" name="excellent" domain="[('status','=','excellent')]"/>
+                    <filter string="Good" name="good" domain="[('status','=','good')]"/>
+                    <filter string="Fair" name="fair" domain="[('status','=','fair')]"/>
+                    <filter string="Poor" name="poor" domain="[('status','=','poor')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Category" name="category" context="{'group_by':'category'}"/>
+                        <filter string="Status" name="status" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Financial Indicator Action -->
+        <record id="action_financial_indicator" model="ir.actions.act_window">
+            <field name="name">Financial Indicators</field>
+            <field name="res_model">financial.indicator</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>

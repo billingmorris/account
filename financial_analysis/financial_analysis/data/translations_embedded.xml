@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Traducciones embebidas directamente en XML para Odoo 16 -->
+        <!-- Esto funciona sin depender de la tabla ir_translation -->
+
+        <!-- Menú Principal -->
+        <record id="menu_financial_analysis" model="ir.ui.menu">
+            <field name="name">Análisis Financiero</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Financial Indicator Detailed Form View -->
+        <record id="financial_indicator_form_detailed" model="ir.ui.view">
+            <field name="name">financial.indicator.form.detailed</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <form string="Financial Indicator">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="excellent,good,fair,poor"/>
+                    </header>
+                    <sheet>
+                        <h2>
+                            <field name="name"/>
+                        </h2>
+
+                        <group>
+                            <group string="Basic Information">
+                                <field name="analysis_id"/>
+                                <field name="category"/>
+                                <field name="value"/>
+                                <field name="unit"/>
+                            </group>
+                            <group string="Comparison">
+                                <field name="benchmark"/>
+                                <field name="variance"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Legend &amp; Interpretation" name="legend">
+                                <group string="How This Indicator Is Measured">
+                                    <field name="legend_formula" nolabel="1" readonly="1"/>
+                                </group>
+
+                                <separator string="What Does It Measure?"/>
+                                <field name="legend_description" nolabel="1" readonly="1"/>
+
+                                <separator string="Your Score Interpretation"/>
+                                <div class="alert alert-info" role="alert">
+                                    <field name="legend_interpretation" nolabel="1" readonly="1"/>
+                                </div>
+
+                                <separator string="How to Improve This Indicator"/>
+                                <field name="legend_improvement" nolabel="1" readonly="1"/>
+                            </page>
+
+                            <page string="Details" name="details">
+                                <field name="description" nolabel="1" placeholder="Additional notes about this indicator..."/>
+                                <separator string="System Notes"/>
+                                <field name="notes" nolabel="1" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Financial Indicator Tree View with Status Colors -->
+        <record id="financial_indicator_tree" model="ir.ui.view">
+            <field name="name">financial.indicator.tree</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <tree string="Financial Indicators" decoration-success="status=='excellent'" decoration-info="status=='good'" decoration-warning="status=='fair'" decoration-danger="status=='poor'">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="value"/>
+                    <field name="unit"/>
+                    <field name="status"/>
+                    <field name="variance"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Financial Indicator Search View -->
+        <record id="financial_indicator_search" model="ir.ui.view">
+            <field name="name">financial.indicator.search</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <search string="Financial Indicators">
+                    <field name="name" string="Indicator"/>
+                    <field name="analysis_id"/>
+                    <filter string="Excellent" name="excellent" domain="[('status','=','excellent')]"/>
+                    <filter string="Good" name="good" domain="[('status','=','good')]"/>
+                    <filter string="Fair" name="fair" domain="[('status','=','fair')]"/>
+                    <filter string="Poor" name="poor" domain="[('status','=','poor')]"/>
+                    <separator/>
+                    <filter string="Profitability" name="profitability" domain="[('category','=','profitability')]"/>
+                    <filter string="Liquidity" name="liquidity" domain="[('category','=','liquidity')]"/>
+                    <filter string="Leverage" name="leverage" domain="[('category','=','leverage')]"/>
+                    <filter string="Efficiency" name="efficiency" domain="[('category','=','efficiency')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Analysis" name="analysis" context="{'group_by':'analysis_id'}"/>
+                        <filter string="Category" name="category" context="{'group_by':'category'}"/>
+                        <filter string="Status" name="status" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Financial Indicator Action -->
+        <record id="action_financial_indicator" model="ir.actions.act_window">
+            <field name="name">Financial Indicators</field>
+            <field name="res_model">financial.indicator</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="financial_indicator_search"/>
+        </record>
+    </data>
+</odoo>

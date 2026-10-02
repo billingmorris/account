@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Financial Analysis Report -->
+        <record id="financial_analysis_report" model="ir.actions.report">
+            <field name="name">Financial Analysis Report</field>
+            <field name="model">financial.analysis</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">financial_analysis.financial_analysis_template</field>
+            <field name="report_file">financial_analysis.financial_analysis_template</field>
+            <field name="print_report_name">'Financial Analysis - %s' % object.name</field>
+        </record>
+
+        <!-- Financial Report Template -->
+        <template id="financial_analysis_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2 t-field="doc.name"/>
+
+                            <!-- Header Info -->
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-6">
+                                    <strong>Company:</strong>
+                                    <span t-field="doc.company_id.name"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Analysis Date:</strong>
+                                    <span t-field="doc.analysis_date"/>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-6">
+                                    <strong>Period:</strong>
+                                    <span t-field="doc.start_date"/> to <span t-field="doc.end_date"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Health Score:</strong>
+                                    <span t-field="doc.health_score"/> / 100 (<span t-field="doc.overall_health"/>)
+                                </div>
+                            </div>
+
+                            <!-- Executive Summary -->
+                            <h3>Executive Summary</h3>
+                            <div class="row" style="background-color: #f0f0f0; padding: 10px; margin-bottom: 20px;">
+                                <div class="col-12">
+                                    <span t-field="doc.summary_text" t-options="{'widget': 'text'}"/>
+                                </div>
+                            </div>
+
+                            <!-- Financial Highlights -->
+                            <h3>Financial Highlights</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr style="background-color: #2d3436; color: white;">
+                                        <th>Metric</th>
+                                        <th class="text-right">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Total Revenue</td>
+                                        <td class="text-right">
+                                            <t t-out="'{:,.2f}'.format(doc.total_revenue)"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cost of Goods Sold</td>
+                                        <td class="text-right">
+                                            <t t-out="'{:,.2f}'.format(doc.cost_of_goods_sold)"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gross Profit</td>
+                                        <td class="text-right">
+                                            <t t-out="'{:,.2f}'.format(doc.gross_profit)"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Operating Expenses</td>
+                                        <td class="text-right">
+                                            <t t-out="'{:,.2f}'.format(doc.operating_expenses)"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color: #ffe3e3;">
+                                        <td><strong>Net Income</strong></td>
+                                        <td class="text-right"><strong><t t-out="'{:,.2f}'.format(doc.net_income)"/></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Key Indicators -->
+                            <h3>Key Financial Indicators</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr style="background-color: #2d3436; color: white;">
+                                        <th>Indicator</th>
+                                        <th class="text-right">Value</th>
+                                        <th class="text-right">Target</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Gross Margin</td>
+                                        <td class="text-right"><t t-out="'{:.2f}%'.format(doc.gross_margin)"/></td>
+                                        <td class="text-right">&gt; 30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net Margin</td>
+                                        <td class="text-right"><t t-out="'{:.2f}%'.format(doc.net_margin)"/></td>
+                                        <td class="text-right">&gt; 10%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ROE (Return on Equity)</td>
+                                        <td class="text-right"><t t-out="'{:.2f}%'.format(doc.roe)"/></td>
+                                        <td class="text-right">&gt; 15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ROA (Return on Assets)</td>
+                                        <td class="text-right"><t t-out="'{:.2f}%'.format(doc.roa)"/></td>
+                                        <td class="text-right">&gt; 5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Current Ratio</td>
+                                        <td class="text-right"><t t-out="'{:.2f}'.format(doc.current_ratio)"/></td>
+                                        <td class="text-right">1.5 - 3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debt to Equity</td>
+                                        <td class="text-right"><t t-out="'{:.2f}'.format(doc.debt_to_equity)"/></td>
+                                        <td class="text-right">&lt; 1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asset Turnover</td>
+                                        <td class="text-right"><t t-out="'{:.2f}'.format(doc.asset_turnover)"/></td>
+                                        <td class="text-right">&gt; 1.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Diagnostics -->
+                            <h3>Key Diagnostics</h3>
+                            <t t-if="doc.diagnostic_ids">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr style="background-color: #2d3436; color: white;">
+                                            <th>Issue</th>
+                                            <th>Category</th>
+                                            <th>Severity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.diagnostic_ids[:5]" t-as="diag">
+                                            <td><t t-out="diag.name"/></td>
+                                            <td><t t-out="diag.get_category_display()"/></td>
+                                            <td>
+                                                <span t-att-style="'color: red' if diag.severity == 'critical' else 'color: orange' if diag.severity == 'high' else 'color: green'">
+                                                    <t t-out="diag.get_severity_display()"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+
+                            <!-- Recommendations -->
+                            <h3>Top Recommendations</h3>
+                            <t t-if="doc.recommendation_ids">
+                                <ol>
+                                    <li t-foreach="doc.recommendation_ids[:5]" t-as="rec">
+                                        <strong><t t-out="rec.name"/></strong> - <t t-out="rec.description"/><br/>
+                                        <small>Expected Impact: <t t-out="rec.expected_impact"/></small>
+                                    </li>
+                                </ol>
+                            </t>
+
+                            <!-- Notes -->
+                            <t t-if="doc.notes">
+                                <h3>Notes</h3>
+                                <div t-field="doc.notes" t-options="{'widget': 'text'}"/>
+                            </t>
+
+                            <!-- Footer -->
+                            <div style="margin-top: 50px; font-size: 10px; color: #999;">
+                                <p>
+                                    Report generated on <span t-field="doc.created_date" t-options="{'widget': 'date'}"/>
+                                    by <span t-field="doc.created_by.name"/>
+                                </p>
+                                <p t-if="doc.reviewed_by">
+                                    Reviewed by <span t-field="doc.reviewed_by.name"/> on <span t-field="doc.reviewed_date" t-options="{'widget': 'date'}"/>
+                                </p>
+                            </div>
+                        </div>
+                    </t t-call>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
