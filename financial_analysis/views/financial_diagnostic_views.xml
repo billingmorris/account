@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Wizard View for Quick Analysis -->
+        <record id="financial_analysis_wizard_form" model="ir.ui.view">
+            <field name="name">financial.analysis.wizard.form</field>
+            <field name="model">financial.analysis.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Quick Financial Analysis">
+                    <group>
+                        <group string="Analysis Type">
+                            <field name="analysis_type"/>
+                            <field name="period_selection"/>
+                        </group>
+                        <group string="Company">
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Period Dates" attrs="{'invisible': [('period_selection','=','current')]}">
+                            <field name="custom_start_date"/>
+                            <field name="custom_end_date"/>
+                        </group>
+                    </group>
+
+                    <group string="Options">
+                        <field name="include_budget_comparison"/>
+                        <field name="include_previous_period"/>
+                        <field name="generate_report"/>
+                    </group>
+
+                    <footer>
+                        <button name="action_create_analysis" string="Create &amp; Analyze" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action to Open Wizard -->
+        <record id="action_financial_analysis_wizard" model="ir.actions.act_window">
+            <field name="name">Quick Financial Analysis</field>
+            <field name="res_model">financial.analysis.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="financial_analysis_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Financial Analysis Tree View -->
+        <record id="financial_analysis_tree" model="ir.ui.view">
+            <field name="name">financial.analysis.tree</field>
+            <field name="model">financial.analysis</field>
+            <field name="arch" type="xml">
+                <tree string="Financial Analysis" decoration-info="state=='draft'" decoration-success="state=='completed'" decoration-warning="health_score &lt; 50">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="analysis_type"/>
+                    <field name="net_income" sum="Total"/>
+                    <field name="net_margin"/>
+                    <field name="health_score"/>
+                    <field name="overall_health"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Financial Analysis Form View -->
+        <record id="financial_analysis_form" model="ir.ui.view">
+            <field name="name">financial.analysis.form</field>
+            <field name="model">financial.analysis</field>
+            <field name="arch" type="xml">
+                <form string="Financial Analysis">
+                    <header>
+                        <button name="action_analyze" string="Analyze" type="object" class="btn-primary" states="draft"/>
+                        <button name="action_mark_reviewed" string="Mark as Reviewed" type="object" states="completed"/>
+                        <button name="action_reset_to_draft" string="Reset to Draft" type="object" states="completed,reviewed"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,completed,reviewed"/>
+                    </header>
+
+                    <sheet>
+                        <div class="alert alert-info" role="alert">
+                            <p>Overall Financial Health: <strong><field name="overall_health" widget="badge"/></strong> (Score: <field name="health_score" widget="float" precision="1"/>)</p>
+                        </div>
+
+                        <h1>
+                            <field name="name" placeholder="Analysis Name"/>
+                        </h1>
+
+                        <group>
+                            <group string="Period Information">
+                                <field name="company_id"/>
+                                <field name="analysis_type"/>
+                                <field name="analysis_date"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="previous_analysis_id"/>
+                            </group>
+                            <group string="Summary KPIs">
+                                <field name="net_margin" widget="float" precision="2"/>
+                                <field name="roe" widget="float" precision="2"/>
+                                <field name="current_ratio" widget="float" precision="2"/>
+                                <field name="debt_to_equity" widget="float" precision="2"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Income Statement" name="income_statement">
+                                <group>
+                                    <group string="Revenue &amp; Profit">
+                                        <field name="total_revenue" widget="monetary"/>
+                                        <field name="cost_of_goods_sold" widget="monetary"/>
+                                        <field name="gross_profit" widget="monetary"/>
+                                        <field name="gross_margin" widget="float" precision="2"/>
+                                    </group>
+                                    <group string="Operating Results">
+                                        <field name="operating_expenses" widget="monetary"/>
+                                        <field name="operating_profit" widget="monetary"/>
+                                        <field name="operating_margin" widget="float" precision="2"/>
+                                        <field name="net_income" widget="monetary"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Balance Sheet" name="balance_sheet">
+                                <group>
+                                    <group string="Assets">
+                                        <field name="current_assets" widget="monetary"/>
+                                        <field name="fixed_assets" widget="monetary"/>
+                                        <field name="total_assets" widget="monetary"/>
+                                    </group>
+                                    <group string="Liabilities &amp; Equity">
+                                        <field name="current_liabilities" widget="monetary"/>
+                                        <field name="long_term_liabilities" widget="monetary"/>
+                                        <field name="total_liabilities" widget="monetary"/>
+                                        <field name="total_equity" widget="monetary"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Financial Indicators" name="indicators">
+                                <field name="indicator_ids" nolabel="1">
+                                    <tree string="Financial Indicators" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="category"/>
+                                        <field name="value"/>
+                                        <field name="unit"/>
+                                        <field name="benchmark"/>
+                                        <field name="variance"/>
+                                        <field name="status" decoration-success="status=='excellent'" decoration-warning="status=='fair'" decoration-danger="status=='poor'"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Diagnostics" name="diagnostics">
+                                <field name="diagnostic_ids" nolabel="1">
+                                    <tree string="Diagnostics" decoration-danger="severity=='critical'" decoration-warning="severity in ('high','medium')" decoration-info="severity=='low'">
+                                        <field name="name"/>
+                                        <field name="category"/>
+                                        <field name="severity"/>
+                                        <field name="description"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Recommendations" name="recommendations">
+                                <field name="recommendation_ids" nolabel="1">
+                                    <tree string="Recommendations" editable="bottom" decoration-danger="priority=='critical'" decoration-warning="priority=='high'">
+                                        <field name="name"/>
+                                        <field name="category"/>
+                                        <field name="priority"/>
+                                        <field name="status"/>
+                                        <field name="expected_impact"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Notes" name="notes">
+                                <field name="notes" nolabel="1" placeholder="Add any notes or observations about this analysis..."/>
+                            </page>
+                        </notebook>
+
+                        <group string="Audit Information">
+                            <group>
+                                <field name="created_by" readonly="1"/>
+                                <field name="created_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="reviewed_by" readonly="1"/>
+                                <field name="reviewed_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Financial Analysis Search View -->
+        <record id="financial_analysis_search" model="ir.ui.view">
+            <field name="name">financial.analysis.search</field>
+            <field name="model">financial.analysis</field>
+            <field name="arch" type="xml">
+                <search string="Financial Analysis">
+                    <field name="name" string="Analysis"/>
+                    <field name="company_id"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                    <filter string="Completed" name="completed" domain="[('state','=','completed')]"/>
+                    <filter string="Reviewed" name="reviewed" domain="[('state','=','reviewed')]"/>
+                    <separator/>
+                    <filter string="Monthly" name="monthly" domain="[('analysis_type','=','monthly')]"/>
+                    <filter string="Quarterly" name="quarterly" domain="[('analysis_type','=','quarterly')]"/>
+                    <filter string="Annual" name="annual" domain="[('analysis_type','=','annual')]"/>
+                    <separator/>
+                    <filter string="Critical Health" name="critical" domain="[('health_score','&lt;',30)]"/>
+                    <filter string="Poor Health" name="poor" domain="[('health_score','&lt;',50)]"/>
+                    <filter string="Good Health" name="good" domain="[('health_score','&gt;=',70)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Company" name="company" context="{'group_by':'company_id'}"/>
+                        <filter string="Analysis Type" name="type" context="{'group_by':'analysis_type'}"/>
+                        <filter string="Health Status" name="health" context="{'group_by':'overall_health'}"/>
+                        <filter string="Analysis Date" name="date" context="{'group_by':'analysis_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Financial Analysis Actions -->
+        <record id="action_financial_analysis" model="ir.actions.act_window">
+            <field name="name">Financial Analysis</field>
+            <field name="res_model">financial.analysis</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="financial_analysis_search"/>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- Financial Indicator Tree View -->
+        <record id="financial_indicator_tree" model="ir.ui.view">
+            <field name="name">financial.indicator.tree</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <tree string="Financial Indicators" decoration-success="status=='excellent'" decoration-warning="status=='fair'" decoration-danger="status=='poor'">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="value"/>
+                    <field name="unit"/>
+                    <field name="benchmark"/>
+                    <field name="variance"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="financial_indicator_form" model="ir.ui.view">
+            <field name="name">financial.indicator.form</field>
+            <field name="model">financial.indicator</field>
+            <field name="arch" type="xml">
+                <form string="Financial Indicator">
+                    <sheet>
+                        <group>
+                            <group string="Indicator Information">
+                                <field name="name"/>
+                                <field name="category"/>
+                                <field name="value"/>
+                                <field name="unit"/>
+                            </group>
+                            <group string="Benchmark &amp; Analysis">
+                                <field name="benchmark"/>
+                                <field name="variance"/>
+                                <field name="status"/>
+                            </group>
+                        </group>
+                        <field name="description" placeholder="Enter indicator description..."/>
+                        <field name="notes" placeholder="Add notes about this indicator..."/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_financial_indicator" model="ir.actions.act_window">
+            <field name="name">Financial Indicators</field>
+            <field name="res_model">financial.indicator</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Financial Diagnostic Tree View -->
+        <record id="financial_diagnostic_tree" model="ir.ui.view">
+            <field name="name">financial.diagnostic.tree</field>
+            <field name="model">financial.diagnostic</field>
+            <field name="arch" type="xml">
+                <tree string="Diagnostics" decoration-danger="severity=='critical'" decoration-warning="severity in ('high','medium')" decoration-info="severity in ('low','info')">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="severity"/>
+                    <field name="status"/>
+                    <field name="owner_id"/>
+                    <field name="deadline"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="financial_diagnostic_form" model="ir.ui.view">
+            <field name="name">financial.diagnostic.form</field>
+            <field name="model">financial.diagnostic</field>
+            <field name="arch" type="xml">
+                <form string="Financial Diagnostic">
+                    <header>
+                        <button name="action_acknowledge" string="Acknowledge" type="object" states="new" class="btn-primary"/>
+                        <button name="action_start_resolution" string="Start Resolution" type="object" states="acknowledged" class="btn-primary"/>
+                        <button name="action_mark_resolved" string="Mark as Resolved" type="object" states="in_progress" class="btn-success"/>
+                        <field name="status" widget="statusbar" statusbar_visible="new,acknowledged,in_progress,resolved"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Diagnostic Information">
+                                <field name="name"/>
+                                <field name="category"/>
+                                <field name="severity" decoration-danger="severity=='critical'" decoration-warning="severity in ('high','medium')"/>
+                            </group>
+                            <group string="Assignment &amp; Timeline">
+                                <field name="owner_id"/>
+                                <field name="deadline"/>
+                            </group>
+                        </group>
+
+                        <field name="description" nolabel="1"/>
+
+                        <group string="Related Metrics" attrs="{'invisible': [('metric_name','=',False)]}">
+                            <group>
+                                <field name="metric_name"/>
+                                <field name="metric_value"/>
+                            </group>
+                            <group>
+                                <field name="metric_target"/>
+                                <field name="metric_variance"/>
+                            </group>
+                        </group>
+
+                        <field name="action_notes" nolabel="1" placeholder="Add action notes here..."/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_financial_diagnostic" model="ir.actions.act_window">
+            <field name="name">Financial Diagnostics</field>
+            <field name="res_model">financial.diagnostic</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Financial Recommendation Tree View -->
+        <record id="financial_recommendation_tree" model="ir.ui.view">
+            <field name="name">financial.recommendation.tree</field>
+            <field name="model">financial.recommendation</field>
+            <field name="arch" type="xml">
+                <tree string="Recommendations" decoration-danger="priority=='critical'" decoration-warning="priority=='high'">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="priority"/>
+                    <field name="status"/>
+                    <field name="estimated_benefit" sum="Total"/>
+                    <field name="implementation_cost" sum="Total"/>
+                    <field name="roi" widget="float" precision="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="financial_recommendation_form" model="ir.ui.view">
+            <field name="name">financial.recommendation.form</field>
+            <field name="model">financial.recommendation</field>
+            <field name="arch" type="xml">
+                <form string="Financial Recommendation">
+                    <header>
+                        <button name="action_start_implementation" string="Start Implementation" type="object" states="not_started" class="btn-primary"/>
+                        <button name="action_mark_completed" string="Mark Completed" type="object" states="in_progress" class="btn-success"/>
+                        <button name="action_hold" string="Hold" type="object" states="in_progress" class="btn-warning"/>
+                        <button name="action_resume" string="Resume" type="object" states="on_hold" class="btn-warning"/>
+                        <field name="status" widget="statusbar" statusbar_visible="not_started,in_progress,completed,on_hold"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Recommendation"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group string="Basic Information">
+                                <field name="category"/>
+                                <field name="priority" decoration-danger="priority=='critical'" decoration-warning="priority=='high'"/>
+                            </group>
+                            <group string="Financial Impact">
+                                <field name="estimated_benefit"/>
+                                <field name="implementation_cost"/>
+                                <field name="roi" widget="float" precision="1"/>
+                            </group>
+                        </group>
+
+                        <field name="description" nolabel="1" placeholder="Detailed description of the recommendation..."/>
+
+                        <group>
+                            <group string="Expected Impact" attrs="{'invisible': [('expected_impact','=',False)]}">
+                                <field name="expected_impact" nolabel="1"/>
+                            </group>
+                            <group string="Implementation Details">
+                                <field name="estimated_days"/>
+                                <field name="owner_id"/>
+                            </group>
+                        </group>
+
+                        <group string="Timeline" attrs="{'invisible': [('status','=','not_started')]}">
+                            <group>
+                                <field name="start_date"/>
+                                <field name="completion_date"/>
+                            </group>
+                            <group>
+                                <field name="actual_benefit"/>
+                            </group>
+                        </group>
+
+                        <group string="Action Steps" attrs="{'invisible': [('action_steps','=',False)]}">
+                            <field name="action_steps" nolabel="1"/>
+                        </group>
+
+                        <field name="notes" nolabel="1" placeholder="Add additional notes..."/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_financial_recommendation" model="ir.actions.act_window">
+            <field name="name">Financial Recommendations</field>
+            <field name="res_model">financial.recommendation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

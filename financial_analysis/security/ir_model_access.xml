@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Financial Analysis -->
+        <record id="financial_analysis_user" model="ir.model.access">
+            <field name="name">Financial Analysis - User</field>
+            <field name="model_id" ref="model_financial_analysis"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="financial_analysis_manager" model="ir.model.access">
+            <field name="name">Financial Analysis - Manager</field>
+            <field name="model_id" ref="model_financial_analysis"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Indicator Legend -->
+        <record id="indicator_legend_user" model="ir.model.access">
+            <field name="name">Indicator Legend - User</field>
+            <field name="model_id" ref="model_indicator_legend"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="indicator_legend_manager" model="ir.model.access">
+            <field name="name">Indicator Legend - Manager</field>
+            <field name="model_id" ref="model_indicator_legend"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Financial Indicator -->
+        <record id="financial_indicator_user" model="ir.model.access">
+            <field name="name">Financial Indicator - User</field>
+            <field name="model_id" ref="model_financial_indicator"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="financial_indicator_manager" model="ir.model.access">
+            <field name="name">Financial Indicator - Manager</field>
+            <field name="model_id" ref="model_financial_indicator"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Financial Diagnostic -->
+        <record id="financial_diagnostic_user" model="ir.model.access">
+            <field name="name">Financial Diagnostic - User</field>
+            <field name="model_id" ref="model_financial_diagnostic"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="financial_diagnostic_manager" model="ir.model.access">
+            <field name="name">Financial Diagnostic - Manager</field>
+            <field name="model_id" ref="model_financial_diagnostic"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Financial Recommendation -->
+        <record id="financial_recommendation_user" model="ir.model.access">
+            <field name="name">Financial Recommendation - User</field>
+            <field name="model_id" ref="model_financial_recommendation"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="financial_recommendation_manager" model="ir.model.access">
+            <field name="name">Financial Recommendation - Manager</field>
+            <field name="model_id" ref="model_financial_recommendation"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Budget Comparison -->
+        <record id="budget_comparison_user" model="ir.model.access">
+            <field name="name">Budget Comparison - User</field>
+            <field name="model_id" ref="model_budget_comparison"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+        <record id="budget_comparison_manager" model="ir.model.access">
+            <field name="name">Budget Comparison - Manager</field>
+            <field name="model_id" ref="model_budget_comparison"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Wizard -->
+        <record id="financial_analysis_wizard_user" model="ir.model.access">
+            <field name="name">Financial Analysis Wizard - User</field>
+            <field name="model_id" ref="model_financial_analysis_wizard"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <!-- Batch Analysis Wizard -->
+        <record id="batch_analysis_wizard_user" model="ir.model.access">
+            <field name="name">Batch Analysis Wizard - User</field>
+            <field name="model_id" ref="model_batch_analysis_wizard"/>
+            <field name="group_id" ref="account.group_account_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="batch_analysis_wizard_manager" model="ir.model.access">
+            <field name="name">Batch Analysis Wizard - Manager</field>
+            <field name="model_id" ref="model_batch_analysis_wizard"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+</odoo>

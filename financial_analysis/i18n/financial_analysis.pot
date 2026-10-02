@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# Copyright (C) 2024 El Monitor
+# This file is distributed under the same license as the Odoo Server package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-29 10:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: financial_analysis
+#: model:ir.model,name:financial_analysis.model_financial_analysis
+msgid "Financial Analysis"
+msgstr ""
+
+#. module: financial_analysis
+#: model:ir.model,name:financial_analysis.model_financial_diagnostic
+msgid "Financial Diagnostic"
+msgstr ""
+
+#. module: financial_analysis
+#: model:ir.model,name:financial_analysis.model_financial_indicator
+msgid "Financial Indicator"
+msgstr ""
+
+#. module: financial_analysis
+#: model:ir.model,name:financial_analysis.model_financial_recommendation
+msgid "Financial Recommendation"
+msgstr ""
+
+#. module: financial_analysis
+#: model:ir.model,name:financial_analysis.model_budget_comparison
+msgid "Budget Comparison"
+msgstr ""
+
+#. module: financial_analysis
+#: model:ir.ui.menu,name:financial_analysis.menu_financial_analysis_root
+msgid "Financial Analysis"
+msgstr ""
+
+#. module: financial_analysis
+#: model:ir.ui.menu,name:financial_analysis.menu_financial_analysis_list
+msgid "All Analyses"
+msgstr ""
